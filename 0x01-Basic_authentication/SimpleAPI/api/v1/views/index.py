@@ -24,3 +24,10 @@ def stats() -> str:
     stats = {}
     stats['users'] = User.count()
     return jsonify(stats)
+
+
+@app_views.route('/unauthorized', strict_slashes=False)
+def abort_endpoint():
+    """ Endpoint for testing 401 error handler.
+    """
+    return abort(401)
