@@ -31,3 +31,10 @@ def abort_endpoint():
     """ Endpoint for testing 401 error handler.
     """
     return abort(401)
+
+
+@app_views.route('/forbidden', strict_slashes=False)
+def forbidden():
+    """ Endpoint for testing 403 error handler.
+    """
+    return abort(403)
