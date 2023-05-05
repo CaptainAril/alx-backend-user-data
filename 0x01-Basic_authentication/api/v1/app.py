@@ -23,6 +23,8 @@ if auth:
 
 @app.before_request
 def before_req():
+    """ Filters each request.
+    """
     if auth is None:
         pass
 
