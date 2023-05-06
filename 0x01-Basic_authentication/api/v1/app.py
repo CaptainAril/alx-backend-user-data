@@ -29,7 +29,7 @@ def before_req():
     """ Filters each request.
     """
     if auth is None:
-        pass
+        return
 
     check_list = [
         '/api/v1/status/',
