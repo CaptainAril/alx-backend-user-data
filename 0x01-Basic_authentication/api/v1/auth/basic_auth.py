@@ -12,10 +12,7 @@ class BasicAuth(Auth):
             self,
             authorization_header: str) -> str:
         """ Extracts the base64 authorization value."""
-        if authorization_header is None:
-            return None
-        if not isinstance(authorization_header, str):
-            return None
-        if 'Basic ' not in authorization_header:
+        if not (authorization_header and isinstance(authorization_header, str)
+            and authorization_header.startswith('Basic ')):
             return None
         return authorization_header.removeprefix('Basic ')
