@@ -13,6 +13,6 @@ class BasicAuth(Auth):
             authorization_header: str) -> str:
         """ Extracts the base64 authorization value."""
         if not (authorization_header and isinstance(authorization_header, str)
-            and authorization_header.startswith('Basic ')):
+                and authorization_header.startswith('Basic ')):
             return None
-        return authorization_header.removeprefix('Basic ')
+        return authorization_header[6:]
