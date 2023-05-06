@@ -52,11 +52,12 @@ class BasicAuth(Auth):
             user_pwd: str) -> TypeVar('User'):
         """ Returns the `User` instance based on email and passeord.
         """
+        usr = User()
         if not (user_email or isinstance(user_email, str)):
             return None
         if not (user_pwd or isinstance(user_pwd, str)):
             return None
-        user_list = User.search({'email': user_email})
+        user_list = usr.search({'email': user_email})
         if len(user_list) > 0:
             user = user_list[0]
             return user if user.is_valid_password(user_pwd) else None
