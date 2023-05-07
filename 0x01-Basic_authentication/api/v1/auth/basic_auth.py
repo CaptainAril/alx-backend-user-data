@@ -43,7 +43,7 @@ class BasicAuth(Auth):
                 isinstance(decoded_base64_authorizaton_header, str) and
                 ':' in decoded_base64_authorizaton_header):
             return None, None
-        name, passwd = decoded_base64_authorizaton_header.split(':')
+        name, passwd = decoded_base64_authorizaton_header.split(':', 1)
         return name, passwd
 
     def user_object_from_credentials(
