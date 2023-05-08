@@ -32,7 +32,7 @@ def before_req():
         return
 
     check_list = [
-        '/api/v1/status/',
+        '/api/v1/stat*',
         '/api/v1/unauthorized/',
         '/api/v1/forbidden/'
         ]
