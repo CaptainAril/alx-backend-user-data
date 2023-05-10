@@ -37,4 +37,4 @@ def post_view():
         _sess_id = getenv('SESSION_NAME')
         res.set_cookie(_sess_id, sess_id)
         return res
-    return jsonify({"error": "no user found for this email"}), 401
+    return jsonify({"error": "no user found for this email"}), 404
