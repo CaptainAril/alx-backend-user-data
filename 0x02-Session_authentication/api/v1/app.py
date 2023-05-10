@@ -37,11 +37,13 @@ def before_req():
     check_list = [
         '/api/v1/stat*',
         '/api/v1/unauthorized/',
-        '/api/v1/forbidden/'
+        '/api/v1/forbidden/',
+        '/api/v1/auth_session/login'
         ]
     if not auth.require_auth(request.path, check_list):
         return
-    if auth.authorization_header(request) is None:
+    if not (auth.authorization_header(request)
+            or auth.session_cookie(request)):
         return abort(401)
     if auth.current_user(request) is None:
         return abort(403)
