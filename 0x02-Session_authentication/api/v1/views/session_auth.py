@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-""" View module to handle all routes
-for the Session authentication.
+""" View module for Session authentication.
 """
 
 from api.v1.views import app_views
@@ -11,6 +10,13 @@ from os import getenv
 
 @app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
 def post_view():
+    """Handles session creation at user login.
+
+    Returns:
+        User: returns user and set session id cookie
+            if user found based on email in request.
+        Error: If no user found.
+    """
     email = request.form.get('email')
     passwd = request.form.get('password')
     if not email:
