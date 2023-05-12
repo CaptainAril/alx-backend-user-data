@@ -42,7 +42,7 @@ class Auth:
             passwd_hash = _hash_password(password)
             return self._db.add_user(email, passwd_hash)
 
-    def valid_login(self, email, password) -> bool:
+    def valid_login(self, email: str, password: str) -> bool:
         """ Validates login credentials.
         """
         try:
