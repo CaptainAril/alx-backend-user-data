@@ -20,7 +20,7 @@ def _hash_password(password: str) -> bytes:
 def _generate_uuid() -> str:
     """ Returns the string representation of a new UUID.
     """
-    return str(uuid.uuid4)
+    return str(uuid.uuid4())
 
 
 class Auth:
@@ -58,3 +58,15 @@ class Auth:
             return checkpw(passwd, user.hashed_password)
         except NoResultFound:
             return False
+
+    def create_session(self, email: str) -> str:
+        """ Takes an email argument for a user and returns a session
+        ID as string.
+        """
+        try:
+            user = self._db.find_user_by(**{"email": email})
+            sess_id = str(_generate_uuid())
+            user.session_id = sess_id
+            return sess_id
+        except NoResultFound:
+            return None

@@ -1,15 +1,14 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
+""" Main file
+"""
 
-from bcrypt import hashpw, gensalt, checkpw
+from auth import Auth
 
+email = 'bob@bob.com'
+password = 'MyPwdOfBob'
+auth = Auth()
 
-def _hash_password(password):
-    """ Returns a bcrypt hash of `password`.
-    """
-    passwd = password.encode('utf-8')
-    salt = gensalt()
-    return hashpw(passwd, salt)
+auth.register_user(email, password)
 
-passwd = input("Enter password: ")
-passHash = _hash_password(passwd)
-print("encrypted password: {}".format(passHash))
+print(auth.create_session(email))
+print(auth.create_session("unknown@email.com"))
