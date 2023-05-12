@@ -1,17 +1,15 @@
-#!/usr/bin/env python3
-"""
-Main file
-"""
-from auth import Auth
+#!/usr/bin/python3
 
-email = 'bob@bob.com'
-password = 'MyPwdOfBob'
-auth = Auth()
+from bcrypt import hashpw, gensalt, checkpw
 
-auth.register_user(email, password)
 
-print(auth.valid_login(email, password))
+def _hash_password(password):
+    """ Returns a bcrypt hash of `password`.
+    """
+    passwd = password.encode('utf-8')
+    salt = gensalt()
+    return hashpw(passwd, salt)
 
-print(auth.valid_login(email, "WrongPwd"))
-
-print(auth.valid_login("unknown@email", password))
+passwd = input("Enter password: ")
+passHash = _hash_password(passwd)
+print("encrypted password: {}".format(passHash))
