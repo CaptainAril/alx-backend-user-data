@@ -6,6 +6,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
+from sqlalchemy.exc import InvalidRequestError
+from sqlalchemy.orm.exc import NoResultFound
 from user import Base, User
 
 
@@ -38,3 +40,17 @@ class DB:
         sess.add(usr)
         sess.commit()
         return usr
+
+    def find_user_by(self, **kwargs):
+        """Returns first user matching query parameter `kwargs`.
+        """
+        for k, v in kwargs.items():
+            try:
+                user = self._session.query(User)\
+                    .filter(getattr(User, k) == v).first()
+            except AttributeError:
+                raise InvalidRequestError
+        if user:
+            return user
+        else:
+            raise NoResultFound
