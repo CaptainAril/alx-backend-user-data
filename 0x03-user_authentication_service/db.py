@@ -54,3 +54,13 @@ class DB:
             return user
         else:
             raise NoResultFound
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        """ Updates User attributes by user_id.
+        """
+        query = {'id': user_id}
+        user = self.find_user_by(**query)
+        if user:
+            for k, v in kwargs.items():
+                setattr(user, k, v)
+        return None
