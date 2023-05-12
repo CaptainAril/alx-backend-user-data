@@ -41,7 +41,7 @@ class DB:
         sess.commit()
         return usr
 
-    def find_user_by(self, **kwargs):
+    def find_user_by(self, **kwargs) -> User:
         """Returns first user matching query parameter `kwargs`.
         """
         for k, v in kwargs.items():
