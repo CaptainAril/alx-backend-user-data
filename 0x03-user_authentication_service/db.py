@@ -62,5 +62,9 @@ class DB:
         user = self.find_user_by(**query)
         if user:
             for k, v in kwargs.items():
-                setattr(user, k, v)
+                try:
+                    getattr(user, k)
+                    setattr(user, k, v)
+                except AttributeError:
+                    raise ValueError
         return None
